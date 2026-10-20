@@ -62,26 +62,14 @@ erDiagram
 
 ## Relationship Summary
 
-  -----------------------------------------------------------------------
-  Relationship                        Meaning
-  ----------------------------------- -----------------------------------
-  Customers → Sales                   One customer can make multiple
-                                      sales.
-
-  Sales → Sale Items                  One sale contains one or more
-                                      product lines.
-
-  Products → Sale Items               A product can appear in many sale
-                                      items.
-
-  Sales → Payments                    A sale can have no payments yet or
-                                      multiple payments.
-
-  Products → Inventory Movements      A product can have multiple stock
-                                      movements.
-
-  Sale Items → Inventory Movements    A sale item can trigger at most one
-                                      inventory movement in this design.
-  -----------------------------------------------------------------------
+-   **Customers → Sales:** One customer can make multiple sales.
+-   **Sales → Sale Items:** One sale contains one or more product lines.
+-   **Products → Sale Items:** A product can appear in many sale items.
+-   **Sales → Payments:** A sale can have no payments yet or multiple
+    payments.
+-   **Products → Inventory Movements:** A product can have multiple
+    stock movements.
+-   **Sale Items → Inventory Movements:** A sale item can trigger at
+    most one inventory movement in this design.
 
 `PK` means primary key and `FK` means foreign key.
