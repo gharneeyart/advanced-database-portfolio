@@ -31,10 +31,13 @@ VALUES ('Grains');
 INSERT INTO categories (category_name) 
 VALUES ('Noodles');
 ```
+<img width="1286" height="471" alt="Screenshot 2026-10-21 at 12 44 43" src="https://github.com/user-attachments/assets/398c64bd-9969-4a17-b6d4-640ba35aa18e" />
+<img width="1280" height="551" alt="Screenshot 2026-10-21 at 12 56 43" src="https://github.com/user-attachments/assets/cc1b1774-8724-424b-9dc1-a49df37dbf87" />
+
 
 ## 3. Product
 ```sql
--- NEGATIVE TESTS (Should Fail)
+-- NEGATIVE TESTS
 -- Negative price violates CHECK constraint
 INSERT INTO products (product_name, category_id, current_price, quantity_in_stock)
 VALUES ('Yam Flour 5kg', 1, -500.00, 10);
@@ -47,7 +50,7 @@ VALUES ('Yam Flour 5kg', 1, 5000.00, -5);
 INSERT INTO products (product_name, category_id, current_price, quantity_in_stock)
 VALUES ('Imported Tea', 999, 2500.00, 10);
 
--- POSITIVE TESTS (Should Pass)
+-- POSITIVE TESTS
 -- Boundary values: zero price and zero stock (e.g., free samples out of stock)
 INSERT INTO products (product_name, category_id, current_price, quantity_in_stock)
 VALUES ('Promo Salt', 3, 0.00, 0);
@@ -56,10 +59,13 @@ VALUES ('Promo Salt', 3, 0.00, 0);
 INSERT INTO products (product_name, category_id, current_price, quantity_in_stock)
 VALUES ('Flour 10kg', 1, 15000.50, 50);
 ```
+<img width="1282" height="628" alt="Screenshot 2026-10-21 at 12 57 50" src="https://github.com/user-attachments/assets/4e110311-f057-4377-97f6-27ba2522257d" />
+<img width="1245" height="702" alt="Screenshot 2026-10-21 at 12 59 45" src="https://github.com/user-attachments/assets/efcd4c38-292b-4135-a6c1-0c27b4f13bcc" />
+
 
 ## 4. Sales
 ```sql
--- NEGATIVE TESTS (Should Fail)
+-- NEGATIVE TESTS 
 -- Negative total amount violates CHECK constraint
 INSERT INTO sales (customer_id, total_amount)
 VALUES (1, -100.00);
@@ -68,23 +74,22 @@ VALUES (1, -100.00);
 INSERT INTO sales (customer_id, total_amount)
 VALUES (999, 5000.00);
 
--- POSITIVE TESTS (Should Pass)
+-- POSITIVE TESTS 
 -- Walk-in sale (customer_id is optional / NULL)
 INSERT INTO sales (customer_id, total_amount)
 VALUES (NULL, 14300.00);
-
--- Zero-total promotional giveaway sale
-INSERT INTO sales (customer_id, total_amount)
-VALUES (1, 0.00);
 
 -- Valid sale linked to an existing customer
 INSERT INTO sales (customer_id, total_amount)
 VALUES (2, 25000.00);
 ```
+<img width="1284" height="559" alt="Screenshot 2026-10-21 at 13 01 44" src="https://github.com/user-attachments/assets/f4c70095-3bce-4456-a890-686294346d99" />
+<img width="1250" height="697" alt="Screenshot 2026-10-21 at 13 04 52" src="https://github.com/user-attachments/assets/dd9331ca-6398-4586-87a4-6d17e267c32e" />
+
 
 ## 5. Sale Items
 ```sql
--- NEGATIVE TESTS (Should Fail)
+-- NEGATIVE TESTS 
 -- Quantity cannot be zero or negative
 INSERT INTO sale_items (sale_id, product_id, quantity, unit_price)
 VALUES (1, 1, 0, 95000.00);
