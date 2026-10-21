@@ -4,10 +4,16 @@ CREATE TABLE customers (
     phone VARCHAR(20)
 );
 
+CREATE TABLE categories (
+    category_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
 CREATE TABLE products (
     product_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     product_name VARCHAR(150) NOT NULL,
-    category VARCHAR(100),
+    category_id INTEGER NOT NULL
+        REFERENCES categories(category_id),
     current_price NUMERIC(12, 2) NOT NULL
         CHECK (current_price >= 0),
     quantity_in_stock INTEGER NOT NULL DEFAULT 0
