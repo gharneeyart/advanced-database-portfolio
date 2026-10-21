@@ -80,4 +80,4 @@ erDiagram
 -   **Sale Items → Inventory Movements:** A sale item can trigger at
     most one inventory movement in this design.
 
-`PK` means primary key and `FK` means foreign key.
+`PK` means primary key, `FK` means foreign key and `UK` Unique key 
