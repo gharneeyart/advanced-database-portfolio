@@ -23,6 +23,7 @@ erDiagram
     PRODUCTS {
         int product_id PK
         string product_name
+        string category
         numeric current_price
         int quantity_in_stock
     }
