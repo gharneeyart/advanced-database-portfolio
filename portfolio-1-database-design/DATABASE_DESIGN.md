@@ -1,6 +1,6 @@
 # Database Design and Relational Schema
 
-The database design translates the ER diagram into six relational
+The database design translates the ER diagram into seven relational
 tables. Each table has a primary key, and foreign keys connect related
 records.
 
@@ -10,6 +10,7 @@ records.
 | Table | Purpose | Primary key |
 |---|---|---|
 | `customers` | Customer information | `customer_id` |
+| `categories`| Category details | `category_id` |
 | `products` | Product details and current stock | `product_id` |
 | `sales` | Receipt-level information | `sale_id` |
 | `sale_items` | Products and quantities on each receipt | `sale_item_id` |
@@ -31,11 +32,15 @@ CUSTOMERS(
     customer_name NN,
     phone
 )
+CATEGORIES(
+    category_id PK,
+    category_name NOT NULL UNIQUE
+)
 
 PRODUCTS(
     product_id PK,
     product_name NN,
-    category,
+    category_id FK  CATEGORIES.category_id NOT NULL,
     current_price CHECK (current_price >= 0),
     quantity_in_stock CHECK (quantity_in_stock >= 0)
 )
