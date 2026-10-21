@@ -7,23 +7,29 @@ The Adetwin Stores database has six entities: `CUSTOMERS`, `PRODUCTS`,
 
 ``` mermaid
 erDiagram
-    CUSTOMERS ||--o{ SALES : makes
+    CUSTOMERS o|--o{ SALES : makes
+    CATEGORIES ||--o{ PRODUCTS : classifies
     SALES ||--|{ SALE_ITEMS : contains
     PRODUCTS ||--o{ SALE_ITEMS : appears_in
     SALES ||--o{ PAYMENTS : receives
     PRODUCTS ||--o{ INVENTORY_MOVEMENTS : has
-    SALE_ITEMS ||--o| INVENTORY_MOVEMENTS : triggers
+    SALE_ITEMS o|--o| INVENTORY_MOVEMENTS : triggers
 
     CUSTOMERS {
         int customer_id PK
-        string customer_name
-        string phone
+        varchar customer_name
+        varchar phone
+    }
+
+    CATEGORIES {
+        int category_id PK
+        varchar category_name UK
     }
 
     PRODUCTS {
         int product_id PK
-        string product_name
-        string category
+        varchar product_name
+        int category_id FK
         numeric current_price
         int quantity_in_stock
     }
@@ -48,14 +54,14 @@ erDiagram
         int sale_id FK
         numeric amount
         timestamp payment_date
-        string payment_method
+        varchar payment_method
     }
 
     INVENTORY_MOVEMENTS {
         int movement_id PK
         int product_id FK
         int sale_item_id FK
-        string movement_type
+        varchar movement_type
         int quantity
         timestamp movement_date
     }
@@ -64,6 +70,7 @@ erDiagram
 ## Relationship Summary
 
 -   **Customers → Sales:** One customer can make multiple sales; a sale may have no linked customer for a walk-in purchase.
+-   **Categories → Products:** One category can contain multiple products. Every product must belong to one category.
 -   **Sales → Sale Items:** One sale contains one or more product lines.
 -   **Products → Sale Items:** A product can appear in many sale items.
 -   **Sales → Payments:** A sale can have no payments yet or multiple
