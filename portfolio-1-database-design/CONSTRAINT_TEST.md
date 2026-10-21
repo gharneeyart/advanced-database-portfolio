@@ -1,3 +1,4 @@
+#Constraints Tests
 ## 1. Customer
 ```sql
 -- NEGATIVE TESTS
@@ -102,8 +103,8 @@ VALUES (1, 1, 1, -10.00);
 INSERT INTO sale_items (sale_id, product_id, quantity, unit_price)
 VALUES (999, 1, 1, 1000.00);
 
--- POSITIVE TESTS (Should Pass)
--- Minimum quantity (1) with zero unit price (free promotional item)
+-- POSITIVE TESTS
+-- Minimum quantity (1) with zero unit price 
 INSERT INTO sale_items (sale_id, product_id, quantity, unit_price)
 VALUES (1, 4, 1, 0.00);
 
@@ -111,9 +112,13 @@ VALUES (1, 4, 1, 0.00);
 INSERT INTO sale_items (sale_id, product_id, quantity, unit_price)
 VALUES (1, 4, 3, 2000.00);
 ```
+<img width="1283" height="630" alt="Screenshot 2026-10-21 at 13 08 03" src="https://github.com/user-attachments/assets/9a2787bb-60d1-4182-9c55-0b7b5f6da185" />
+<img width="1215" height="722" alt="Screenshot 2026-10-21 at 13 10 22" src="https://github.com/user-attachments/assets/b56745aa-ea42-4b02-97d2-8f02c8fbc33c" />
+
+
 ## 6. Payments
 ```sql
--- NEGATIVE TESTS (Should Fail)
+-- NEGATIVE TESTS
 -- Amount must be strictly greater than 0
 INSERT INTO payments (sale_id, amount, payment_method)
 VALUES (1, 0.00, 'CASH');
@@ -122,7 +127,7 @@ VALUES (1, 0.00, 'CASH');
 INSERT INTO payments (sale_id, amount, payment_method)
 VALUES (1, 5000.00, 'CREDIT_CARD');
 
--- POSITIVE TESTS (Should Pass)
+-- POSITIVE TESTS 
 -- Minimum positive amount using CASH
 INSERT INTO payments (sale_id, amount, payment_method)
 VALUES (1, 0.01, 'CASH');
@@ -135,6 +140,10 @@ VALUES (1, 5000.00, 'TRANSFER');
 INSERT INTO payments (sale_id, amount, payment_method)
 VALUES (1, 12000.00, 'POS');
 ```
+<img width="1289" height="550" alt="Screenshot 2026-10-21 at 13 23 17" src="https://github.com/user-attachments/assets/9ba88026-74a7-4b80-b35d-8c31de363bdc" />
+<img width="1366" height="514" alt="Screenshot 2026-10-21 at 13 27 16" src="https://github.com/user-attachments/assets/2b62727a-7895-4f55-a907-203e01cd5c96" />
+
+
 
 ## 7. Inventory movements
 ```sql
@@ -155,16 +164,20 @@ VALUES (1, 'STOCK_IN', 0);
 INSERT INTO inventory_movements (product_id, sale_item_id, movement_type, quantity)
 VALUES (1, 1, 'SALE', 1);
 
--- POSITIVE TESTS (Should Pass)
--- STOCK_IN movement with NULL sale_item_id
-INSERT INTO inventory_movements (product_id, movement_type, quantity)
-VALUES (1, 'STOCK_IN', 50);
+-- POSITIVE TESTS 
+-- Step 1: Create a new sale
+INSERT INTO sales (customer_id, total_amount) 
+VALUES (1, 2000.00); 
 
--- ADJUSTMENT movement with NULL sale_item_id
-INSERT INTO inventory_movements (product_id, movement_type, quantity)
-VALUES (1, 'ADJUSTMENT', 2);
+-- Step 2: Create a new sale_item linked to that new sale and an existing product (e.g., product_id 4)
+INSERT INTO sale_items (sale_id, product_id, quantity, unit_price) 
+VALUES (5, 4, 1, 2000.00); 
 
--- SALE movement with a fresh, unlinked sale_item_id (assuming sale_item_id 9 exists and is unused)
+-- Step 3: Now successfully run the inventory movement for that new sale item
 INSERT INTO inventory_movements (product_id, sale_item_id, movement_type, quantity)
 VALUES (4, 9, 'SALE', 1);
 ```
+<img width="1289" height="662" alt="Screenshot 2026-10-21 at 13 30 50" src="https://github.com/user-attachments/assets/30a07dac-a066-42f1-bc65-2e07ea054de5" />
+<img width="1442" height="484" alt="Screenshot 2026-10-21 at 13 37 57" src="https://github.com/user-attachments/assets/c5e4ce0a-dcf2-44fc-b19d-5fc46e2a3b08" />
+
+
