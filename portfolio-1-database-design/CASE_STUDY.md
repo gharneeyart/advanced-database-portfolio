@@ -24,6 +24,14 @@ The purpose of the system is to improve record keeping, reduce errors,
 make sales and payment information easier to retrieve, and support
 better inventory management and business decisions.
 
+## Intended Users
+
+Cashiers: Record sales, products sold, and payments received.
+
+Store managers: Review sales, monitor outstanding balances, and oversee store operations.
+
+Inventory clerks: Maintain stock records, record stock received, and document inventory adjustments.
+
 ## Main Business Rules
 
 1.  Each product has a unique product ID.
@@ -39,3 +47,4 @@ be linked to a customer record.
 7.  Stock quantities cannot be negative.
 8.  Recording a sale, its items, payment records, and related stock
     changes must be handled consistently.
+9.  A category can contain many products.
