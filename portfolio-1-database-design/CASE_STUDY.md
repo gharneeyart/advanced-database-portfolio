@@ -29,7 +29,9 @@ better inventory management and business decisions.
 1.  Each product has a unique product ID.
 2.  A receipt can contain multiple products, and each product line
     records its quantity and selling price.
-3.  Each sale is linked to a customer in this initial design.
+3.  Walk-in sales may have no customer record; if a customer ID is
+supplied, it must refer to an existing customer. Credit sales must
+be linked to a customer record.
 4.  A sale can receive multiple payments, including partial payments.
 5.  Outstanding balance equals the sale total minus payments received.
 6.  Each inventory movement belongs to a product and records a stock
