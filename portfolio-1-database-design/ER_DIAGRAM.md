@@ -62,7 +62,7 @@ erDiagram
 
 ## Relationship Summary
 
--   **Customers → Sales:** One customer can make multiple sales.
+-   **Customers → Sales:** One customer can make multiple sales; a sale may have no linked customer for a walk-in purchase.
 -   **Sales → Sale Items:** One sale contains one or more product lines.
 -   **Products → Sale Items:** A product can appear in many sale items.
 -   **Sales → Payments:** A sale can have no payments yet or multiple
