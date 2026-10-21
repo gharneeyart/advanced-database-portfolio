@@ -7,6 +7,7 @@ CREATE TABLE customers (
 CREATE TABLE products (
     product_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     product_name VARCHAR(150) NOT NULL,
+    category VARCHAR(100),
     current_price NUMERIC(12, 2) NOT NULL
         CHECK (current_price >= 0),
     quantity_in_stock INTEGER NOT NULL DEFAULT 0
