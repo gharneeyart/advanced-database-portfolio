@@ -35,6 +35,7 @@ CUSTOMERS(
 PRODUCTS(
     product_id PK,
     product_name NN,
+    category,
     current_price CHECK (current_price >= 0),
     quantity_in_stock CHECK (quantity_in_stock >= 0)
 )
