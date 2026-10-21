@@ -41,7 +41,7 @@ PRODUCTS(
 
 SALES(
     sale_id PK,
-    customer_id FK,
+    customer_id FK (optional for walk-in sales),
     sale_date NN,
     total_amount CHECK (total_amount >= 0)
 )
@@ -84,7 +84,12 @@ INVENTORY_MOVEMENTS(
     item cannot be linked to multiple stock movements.
 
 The current design requires every sale to have a customer record. This
-can be revised if anonymous cash purchases must be supported. The
+can be revised if anonymous cash purchases must be supported. 
+The `sales.customer_id` field is optional so walk-in customers can make
+purchases without a customer record. If a customer ID is supplied, it
+must match an existing record. 
+For credit sales, the store should create
+a customer record so payments and outstanding balances can be tracked.The
 `sale_items.unit_price` stores the price charged at the time of sale,
 even if the current product price changes later.
 
