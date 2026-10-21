@@ -15,8 +15,7 @@ CREATE TABLE products (
 
 CREATE TABLE sales (
     sale_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    customer_id INTEGER NOT NULL
-        REFERENCES customers(customer_id),
+    customer_id INTEGER REFERENCES customers(customer_id)
     sale_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     total_amount NUMERIC(12, 2) NOT NULL
         CHECK (total_amount >= 0)
